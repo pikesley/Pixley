@@ -1,4 +1,3 @@
-import mock
 import pytest
 
 from pixley import *
@@ -20,6 +19,9 @@ def test_light():
         (0, 0, 0), (255, 0, 0), (0, 0, 0), (255, 0, 0),
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
     ]
+
+def test_light_different_colours():
+    neopixels = FakePixels
 
 class FakePixels(list):
     def __init__(self, n):
