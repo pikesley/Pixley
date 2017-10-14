@@ -4,5 +4,8 @@ def blank(neopixels, display = False):
     if display: neopixels.show()
 
 def light(neopixels, pixels, colour):
+    if not type(pixels) == list:
+        pixels = [pixels]
+
     for p in pixels:
         neopixels[p] = colour
