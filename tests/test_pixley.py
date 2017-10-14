@@ -34,6 +34,15 @@ def test_light_different_colours():
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
     ]
 
+def test_light_range():
+    neopixels = FakePixels(12)
+    light(neopixels, (3, 6), (0, 127, 0))
+    assert neopixels == [
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 127, 0),
+        (0, 127, 0), (0, 127, 0), (0, 127, 0), (0, 0, 0),
+        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
+    ]
+
 class FakePixels(list):
     def __init__(self, n):
         self.n = n

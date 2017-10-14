@@ -4,6 +4,12 @@ def blank(neopixels, display = False):
     if display: neopixels.show()
 
 def light(neopixels, pixels, colour):
+    if type(pixels) == tuple:
+        x = []
+        for i in range(pixels[0], pixels[1] + 1):
+            x.append(i)
+        pixels = x
+
     if not type(pixels) == list:
         pixels = [pixels]
 
