@@ -18,6 +18,11 @@ def test_light():
         (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
     ]
 
+def test_light_overflow():
+    neopixels = FakePixels(12)
+    light(neopixels, 14, (255, 255, 255))
+    assert neopixels[2] == (255, 255, 255)
+
 def test_light_different_colours():
     neopixels = FakePixels(12)
     light(neopixels, 1, (0, 0, 255))

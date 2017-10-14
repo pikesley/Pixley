@@ -8,4 +8,4 @@ def light(neopixels, pixels, colour):
         pixels = [pixels]
 
     for p in pixels:
-        neopixels[p] = colour
+        neopixels[p % neopixels.n] = colour
