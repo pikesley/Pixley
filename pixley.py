@@ -30,7 +30,7 @@ class WavePosition:
         cls.position = 0
 
 def wave(neopixels, colour):
-    light(neopixels, (0, 11), fractional_colour(colour, 0.25))
+    light(neopixels, (0, 11), fractional_colour(colour, 0.1))
     light(neopixels, [WavePosition.position, neopixels.n - (WavePosition.position + 1)], colour)
 
     WavePosition.increment(neopixels.n / 2)
