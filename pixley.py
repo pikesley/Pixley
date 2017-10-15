@@ -19,11 +19,21 @@ def light(neopixels, pixels, colour):
 class WavePosition:
     position = 0
 
+    @classmethod
+    def increment(cls, limit):
+        cls.position = cls.position + 1
+        if cls.position == limit:
+            cls.position = 0
+
+    @classmethod
+    def reset(cls):
+        cls.position = 0
+
 def wave(neopixels, colour):
     light(neopixels, (0, 11), fractional_colour(colour, 0.25))
     light(neopixels, [WavePosition.position, neopixels.n - (WavePosition.position + 1)], colour)
 
-    WavePosition.position = WavePosition.position + 1
+    WavePosition.increment(neopixels.n / 2)
 
 def fractional_colour(colour, proportion):
     return tuple(map(lambda x: int(x * proportion), colour))

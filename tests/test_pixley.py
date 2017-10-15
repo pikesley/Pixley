@@ -60,6 +60,15 @@ def test_wave():
         (63, 0, 0), (63, 0, 0), (255, 0, 0), (63, 0, 0)
     ]
 
+def test_wave_position():
+    WavePosition.reset()
+    assert WavePosition.position == 0
+
+    for i in range(6):
+        WavePosition.increment(6)
+
+    assert WavePosition.position == 0
+
 def test_fractional_colour():
     assert fractional_colour((255, 255, 255), 0.5) == (127, 127, 127)
     assert fractional_colour((255, 0, 255), 0.5) == (127, 0, 127)
