@@ -1,4 +1,5 @@
 import pytest
+from helpers import *
 from pixley import *
 
 def test_blank():
@@ -72,31 +73,3 @@ def test_wave_position():
 def test_fractional_colour():
     assert fractional_colour((255, 255, 255), 0.5) == (127, 127, 127)
     assert fractional_colour((255, 0, 255), 0.5) == (127, 0, 127)
-
-def test_knight_rider_sequence():
-    assert knight_rider_sequence(32) == [
-        ( 4,  3),
-        ( 5,  2),
-        ( 6,  1),
-        ( 7,  0),
-        ( 8, 15),
-        ( 9, 14),
-        (10, 13),
-        (11, 12),
-
-        (20, 19),
-        (21, 18),
-        (22, 17),
-        (23, 16),
-        (24, 31),
-        (25, 30),
-        (26, 29),
-        (27, 28)
-    ]
-################################################################################
-
-class FakePixels(list):
-    def __init__(self, n):
-        self.n = n
-        for i in range(n):
-            self.append((0, 0, 0))
