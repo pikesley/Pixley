@@ -1,6 +1,6 @@
 import pytest
 from helpers import *
-from knight_rider import KnightRider
+from patterns.knight_rider import KnightRider
 
 def test_sequence():
     neopixels = FakePixels(32)
