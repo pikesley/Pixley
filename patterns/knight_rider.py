@@ -7,18 +7,15 @@ class KnightRider(Pixley):
     def run(self):
         seq = self.sequence()
         for pair in seq[:-1]:
+            self.light_all((63, 0, 0))
             self.light(pair, (255, 0, 0))
             self.show()
-            time.sleep(0.01)
-            self.light_all((63, 0, 0))
 
         seq.reverse()
         for pair in seq[:-1]:
+            self.light_all((63, 0, 0))
             self.light(pair, (255, 0, 0))
             self.show()
-            time.sleep(0.01)
-            self.light_all((63, 0, 0))
-
 
     def sequence(self):
         offset = 4

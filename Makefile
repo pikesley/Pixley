@@ -1,5 +1,5 @@
 test:
-	pytest tests
+	pytest tests -v
 
 clean:
 	find . -name "*pyc" -delete
