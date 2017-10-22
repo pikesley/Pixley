@@ -1,48 +1,47 @@
 import pytest
 from helpers import *
-# from pixley import *
 
-from Pixley.pixley_pixels import PixleyPixels
+from Pixley.pixley import Pixley
 
-class TestPixleyPixels:
+class TestPixley:
     def test_blank(self):
         neopixels = FakePixels(12)
-        pp = PixleyPixels(neopixels)
+        pix = Pixley(neopixels)
 
         for i in range(12):
-            assert(pp[i]) == (0, 0, 0)
+            assert(pix[i]) == (0, 0, 0)
 
 
     def test_light(self):
-        pp = PixleyPixels(FakePixels(12))
-        pp.light([5, 7], (255, 0, 0))
+        pix = Pixley(FakePixels(12))
+        pix.light([5, 7], (255, 0, 0))
 
-        assert pp.neopixels == [
+        assert pix.neopixels == [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (255, 0, 0), (0, 0, 0), (255, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
         ]
 
     def test_light_overflow(self):
-        pp = PixleyPixels(FakePixels(12))
-        pp.light(14, (255, 255, 255))
-        assert pp.neopixels[2] == (255, 255, 255)
+        pix = Pixley(FakePixels(12))
+        pix.light(14, (255, 255, 255))
+        assert pix.neopixels[2] == (255, 255, 255)
 
     def test_light_different_colours(self):
-        pp = PixleyPixels(FakePixels(12))
-        pp.light(1, (0, 0, 255))
-        pp.light(7, (0, 255, 255))
+        pix = Pixley(FakePixels(12))
+        pix.light(1, (0, 0, 255))
+        pix.light(7, (0, 255, 255))
 
-        assert pp.neopixels == [
+        assert pix.neopixels == [
             (0, 0, 0), (0, 0, 255), (0, 0, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 255, 255),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
         ]
 
     def test_light_range(self):
-        pp = PixleyPixels(FakePixels(12))
-        pp.light((3, 6), (0, 127, 0))
-        assert pp.neopixels == [
+        pix = Pixley(FakePixels(12))
+        pix.light((3, 6), (0, 127, 0))
+        assert pix.neopixels == [
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 127, 0),
             (0, 127, 0), (0, 127, 0), (0, 127, 0), (0, 0, 0),
             (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)

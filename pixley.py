@@ -1,6 +1,6 @@
 import time
 
-class PixleyPixels(object):
+class Pixley(object):
     def __init__(self, neopixels):
         self.neopixels = neopixels
         self.set_home_pixels(16, 0)
