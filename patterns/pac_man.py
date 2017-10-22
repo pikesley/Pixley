@@ -4,18 +4,23 @@ class PacMan(Pixley):
     def __init__(self, neopixels):
         super(PacMan, self).__init__(neopixels)
 
-    # def run(self):
-    #     seq = self.sequence()
-    #     for pair in seq[:-1]:
-    #         self.light_all((63, 0, 0))
-    #         self.light(pair, (255, 0, 0))
-    #         self.show()
-    #
-    #     seq.reverse()
-    #     for pair in seq[:-1]:
-    #         self.light_all((63, 0, 0))
-    #         self.light(pair, (255, 0, 0))
-    #         self.show()
+    def run(self):
+        yellow = (127, 255, 0)
+        blank = (0, 0, 0)
+
+        seq = self.sequence()
+        for set in seq:
+            self.light(set['on'], yellow)
+            self.light(set['off'], blank)
+            self.show()
+            time.sleep(0.05)
+
+        seq.reverse()
+        for set in seq:
+            self.light(set['on'], yellow)
+            self.light(set['off'], blank)
+            self.show()
+            time.sleep(0.05)
 
     def sequence(self):
         on = list(range(16, 32))
@@ -28,8 +33,8 @@ class PacMan(Pixley):
         ]
 
         for i in range(4):
-            off.append(on.pop(0))
-            off.append(on.pop(-1))
+            for j in range(2):
+                off.append(on.pop(4 - i))
             seq.append({
                 "on": on[:],
                 "off": sorted(off[:])
