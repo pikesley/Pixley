@@ -1,6 +1,6 @@
 import pytest
 from helpers import *
-from patterns.knight_rider import KnightRider
+from Pixley.patterns.knight_rider import KnightRider
 
 def test_sequence():
     neopixels = FakePixels(32)

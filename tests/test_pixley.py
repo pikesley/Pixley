@@ -1,75 +1,54 @@
 import pytest
 from helpers import *
-from pixley import *
+# from pixley import *
 
-def test_blank():
-    neopixels = FakePixels(12)
-    blank(neopixels)
+from Pixley.pixley_pixels import PixleyPixels
 
-    for i in range(12):
-        assert(neopixels[i]) == (0, 0, 0)
+class TestPixleyPixels:
+    def test_blank(self):
+        neopixels = FakePixels(12)
+        pp = PixleyPixels(neopixels)
 
-def test_light():
-    neopixels = FakePixels(12)
-    light(neopixels, [5, 7], (255, 0, 0))
+        for i in range(12):
+            assert(pp[i]) == (0, 0, 0)
 
-    assert neopixels == [
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (255, 0, 0), (0, 0, 0), (255, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
-    ]
 
-def test_light_overflow():
-    neopixels = FakePixels(12)
-    light(neopixels, 14, (255, 255, 255))
-    assert neopixels[2] == (255, 255, 255)
+    def test_light(self):
+        pp = PixleyPixels(FakePixels(12))
+        pp.light([5, 7], (255, 0, 0))
 
-def test_light_different_colours():
-    neopixels = FakePixels(12)
-    light(neopixels, 1, (0, 0, 255))
-    light(neopixels, 7, (0, 255, 255))
+        assert pp.neopixels == [
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0),
+            (0, 0, 0), (255, 0, 0), (0, 0, 0), (255, 0, 0),
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
+        ]
 
-    assert neopixels == [
-        (0, 0, 0), (0, 0, 255), (0, 0, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 255, 255),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
-    ]
+    def test_light_overflow(self):
+        pp = PixleyPixels(FakePixels(12))
+        pp.light(14, (255, 255, 255))
+        assert pp.neopixels[2] == (255, 255, 255)
 
-def test_light_range():
-    neopixels = FakePixels(12)
-    light(neopixels, (3, 6), (0, 127, 0))
-    assert neopixels == [
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 127, 0),
-        (0, 127, 0), (0, 127, 0), (0, 127, 0), (0, 0, 0),
-        (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
-    ]
+    def test_light_different_colours(self):
+        pp = PixleyPixels(FakePixels(12))
+        pp.light(1, (0, 0, 255))
+        pp.light(7, (0, 255, 255))
 
-def test_wave():
-    neopixels = FakePixels(12)
+        assert pp.neopixels == [
+            (0, 0, 0), (0, 0, 255), (0, 0, 0), (0, 0, 0),
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 255, 255),
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
+        ]
 
-    wave(neopixels, (255, 0, 0))
-    assert neopixels == [
-        (255, 0, 0), (25, 0, 0), (25, 0, 0), (25, 0, 0),
-        (25, 0, 0), (25, 0, 0), (25, 0, 0), (25, 0, 0),
-        (25, 0, 0), (25, 0, 0), (25, 0, 0), (255, 0, 0)
-    ]
+    def test_light_range(self):
+        pp = PixleyPixels(FakePixels(12))
+        pp.light((3, 6), (0, 127, 0))
+        assert pp.neopixels == [
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 127, 0),
+            (0, 127, 0), (0, 127, 0), (0, 127, 0), (0, 0, 0),
+            (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)
+        ]
 
-    wave(neopixels, (255, 0, 0))
-    assert neopixels == [
-        (25, 0, 0), (255, 0, 0), (25, 0, 0), (25, 0, 0),
-        (25, 0, 0), (25, 0, 0), (25, 0, 0), (25, 0, 0),
-        (25, 0, 0), (25, 0, 0), (255, 0, 0), (25, 0, 0)
-    ]
-
-def test_wave_position():
-    WavePosition.reset()
-    assert WavePosition.position == 0
-
-    for i in range(6):
-        WavePosition.increment(6)
-
-    assert WavePosition.position == 0
-
-def test_fractional_colour():
-    assert fractional_colour((255, 255, 255), 0.5) == (127, 127, 127)
-    assert fractional_colour((255, 0, 255), 0.5) == (127, 0, 127)
+#
+# def test_fractional_colour():
+#     assert fractional_colour((255, 255, 255), 0.5) == (127, 127, 127)
+#     assert fractional_colour((255, 0, 255), 0.5) == (127, 0, 127)

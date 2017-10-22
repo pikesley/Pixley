@@ -1,3 +1,5 @@
+import time
+
 class PixleyPixels(object):
     def __init__(self, neopixels):
         self.neopixels = neopixels
@@ -31,3 +33,6 @@ class PixleyPixels(object):
     def set_home_pixels(self, left, right):
         self.left_home = left
         self.right_home = right
+
+    def __getitem__(self, index):
+        return self.neopixels[index]

@@ -1,4 +1,4 @@
-from pixley_pixels import PixleyPixels
+from Pixley.pixley_pixels import *
 
 class KnightRider(PixleyPixels):
     def __init__(self, neopixels):
